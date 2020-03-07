@@ -22,7 +22,7 @@ public class SetUpMyUser {
         /*
          *   Drop Table for clean start
          */
-        myDB.dropMyuserTable();
+       // myDB.dropMyuserTable();
         myDB.createMyuserTable();
         
         
