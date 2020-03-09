@@ -5,7 +5,7 @@
  */
 package ed.jpa;
 
-import entity.MyUser;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -30,6 +30,7 @@ public class MyUserDB {
 
     public MyUser findMyUser(String userid) {
         return em.find(MyUser.class, userid);
+
     }
 
     public boolean createMyUser(MyUser myUser) throws Exception {
@@ -69,5 +70,44 @@ public class MyUserDB {
         myUser.setSecqn(myDTO.getSecQn());
         myUser.setSecans(myDTO.getSecAns());
         return myUser;
+    }
+
+    
+    public MyUserDTO getRecord(String userId) {
+        MyUser myUser = findMyUser(userId);
+        
+        if (myUser == null)
+            return null;
+        else
+            return new MyUserDTO(myUser.getUserid(),
+                    myUser.getName(),
+                    myUser.getPassword(),  
+                    myUser.getEmail(),
+                    myUser.getPhone(),
+                    myUser.getAddress(),
+                    myUser.getSecqn(),
+                    myUser.getSecans()
+            );
+    }
+
+    public boolean updateRecord(MyUserDTO myUserDTO) {
+        MyUser myUser = findMyUser(myUserDTO.getUserid());
+        if (myUser != null) {           
+            myUser.setName(myUserDTO.getName());
+            myUser.setPassword(myUserDTO.getPassword());
+            myUser.setEmail(myUserDTO.getEmail());
+            myUser.setPhone(myUserDTO.getPhone());
+            myUser.setAddress(myUserDTO.getAddress());
+            myUser.setSecqn(myUserDTO.getSecQn());
+            myUser.setSecans(myUserDTO.getSecAns());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean deleteRecord(String userId) {
+        
+        return false;
     }
 }

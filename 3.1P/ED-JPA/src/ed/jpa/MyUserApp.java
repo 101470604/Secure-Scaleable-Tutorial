@@ -11,7 +11,7 @@ package ed.jpa;
  */
 public class MyUserApp {
 
-    private MyUserDB mydb;
+    private final MyUserDB mydb;
 
     public MyUserApp() {
         mydb = new MyUserDB();
@@ -19,13 +19,13 @@ public class MyUserApp {
 
     public static void main(String[] args) {
         MyUserApp client = new MyUserApp();
-// assuming inputs from keyboard or any GUI
+        // assuming inputs from keyboard or any GUI
         MyUserDTO myUserDTO = new MyUserDTO("000001", "Peter Smith", "123456",
                 "psmith@swin.edu.au", "9876543210", "Swinburne EN510f",
                 "What is my name?", "Peter");
         boolean result = client.createRecord(myUserDTO);
         client.showCreateResult(result, myUserDTO);
-// assuming inputs from keyboard or any GUI
+        // assuming inputs from keyboard or any GUI
         MyUserDTO myUserDTO2 = new MyUserDTO("000006", "David Lee", "654321",
                 "dlee@swin.edu.au", "0123456789", "Swinburne EN510g",
                 "What is my name?", "David");

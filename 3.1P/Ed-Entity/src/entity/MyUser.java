@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package ed.jpa;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -21,15 +21,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MYUSER")
 @NamedQueries({
-    @NamedQuery(name = "Myuser.findAll", query = "SELECT m FROM Myuser m"),
-    @NamedQuery(name = "Myuser.findByUserid", query = "SELECT m FROM Myuser m WHERE m.userid = :userid"),
-    @NamedQuery(name = "Myuser.findByName", query = "SELECT m FROM Myuser m WHERE m.name = :name"),
-    @NamedQuery(name = "Myuser.findByPassword", query = "SELECT m FROM Myuser m WHERE m.password = :password"),
-    @NamedQuery(name = "Myuser.findByEmail", query = "SELECT m FROM Myuser m WHERE m.email = :email"),
-    @NamedQuery(name = "Myuser.findByPhone", query = "SELECT m FROM Myuser m WHERE m.phone = :phone"),
-    @NamedQuery(name = "Myuser.findByAddress", query = "SELECT m FROM Myuser m WHERE m.address = :address"),
-    @NamedQuery(name = "Myuser.findBySecqn", query = "SELECT m FROM Myuser m WHERE m.secqn = :secqn"),
-    @NamedQuery(name = "Myuser.findBySecans", query = "SELECT m FROM Myuser m WHERE m.secans = :secans")})
+    @NamedQuery(name = "MyUser.findAll", query = "SELECT m FROM MyUser m"),
+    @NamedQuery(name = "MyUser.findByUserid", query = "SELECT m FROM MyUser m WHERE m.userid = :userid"),
+    @NamedQuery(name = "MyUser.findByName", query = "SELECT m FROM MyUser m WHERE m.name = :name"),
+    @NamedQuery(name = "MyUser.findByPassword", query = "SELECT m FROM MyUser m WHERE m.password = :password"),
+    @NamedQuery(name = "MyUser.findByEmail", query = "SELECT m FROM MyUser m WHERE m.email = :email"),
+    @NamedQuery(name = "MyUser.findByPhone", query = "SELECT m FROM MyUser m WHERE m.phone = :phone"),
+    @NamedQuery(name = "MyUser.findByAddress", query = "SELECT m FROM MyUser m WHERE m.address = :address"),
+    @NamedQuery(name = "MyUser.findBySecqn", query = "SELECT m FROM MyUser m WHERE m.secqn = :secqn"),
+    @NamedQuery(name = "MyUser.findBySecans", query = "SELECT m FROM MyUser m WHERE m.secans = :secans")})
 public class MyUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
