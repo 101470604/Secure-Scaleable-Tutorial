@@ -5,7 +5,7 @@
  */
 package ed.jpa;
 
-
+import entity.Myuser;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,13 +14,13 @@ import javax.persistence.Persistence;
  *
  * @author Tom
  */
-public class MyUserDB {
+public class MyuserDB {
 
     private EntityManager em = null;
 
-    public MyUserDB() {
+    public MyuserDB() {
 // using default persistence unit defined in the persistence.xml file
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Ed-EntityPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ED-EntityPU");
         em = emf.createEntityManager();
     }
 
@@ -28,20 +28,19 @@ public class MyUserDB {
         return em;
     }
 
-    public MyUser findMyUser(String userid) {
-        return em.find(MyUser.class, userid);
-
+    public Myuser findMyuser(String userid) {
+        return em.find(Myuser.class, userid);
     }
 
-    public boolean createMyUser(MyUser myUser) throws Exception {
+    public boolean createMyuser(Myuser myuser) throws Exception {
         try {
-            if (findMyUser(myUser.getUserid()) != null) {
-// myUser exists already
+            if (findMyuser(myuser.getUserid()) != null) {
+// myuser exists already
                 return false;
             }
-// myUser does not exist in database
+// myuser does not exist in database
             em.getTransaction().begin();
-            em.persist(myUser); // to add an object to database
+            em.persist(myuser); // to add an object to database
             em.getTransaction().commit();
             return true;
         } catch (Exception ex) {
@@ -49,64 +48,73 @@ public class MyUserDB {
         }
     }
 
-    public boolean createRecord(MyUserDTO myUserDTO) {
-        MyUser myUser = this.myDTO2DAO(myUserDTO);
+    public boolean createRecord(MyuserDTO myuserDTO) {
+        Myuser myuser = this.myDTO2DAO(myuserDTO);
         boolean result = false;
         try {
-            result = this.createMyUser(myUser);
+            result = this.createMyuser(myuser);
         } catch (Exception ex) {
         }
         return result;
     }
 
-    private MyUser myDTO2DAO(MyUserDTO myDTO) {
-        MyUser myUser = new MyUser();
-        myUser.setUserid(myDTO.getUserid());
-        myUser.setName(myDTO.getName());
-        myUser.setPassword(myDTO.getPassword());
-        myUser.setEmail(myDTO.getEmail());
-        myUser.setPhone(myDTO.getPhone());
-        myUser.setAddress(myDTO.getAddress());
-        myUser.setSecqn(myDTO.getSecQn());
-        myUser.setSecans(myDTO.getSecAns());
-        return myUser;
+    private Myuser myDTO2DAO(MyuserDTO myDTO) {
+        Myuser myuser = new Myuser();
+        myuser.setUserid(myDTO.getUserid());
+        myuser.setName(myDTO.getName());
+        myuser.setPassword(myDTO.getPassword());
+        myuser.setEmail(myDTO.getEmail());
+        myuser.setPhone(myDTO.getPhone());
+        myuser.setAddress(myDTO.getAddress());
+        myuser.setSecqn(myDTO.getSecQn());
+        myuser.setSecans(myDTO.getSecAns());
+        return myuser;
     }
-
     
-    public MyUserDTO getRecord(String userId) {
-        MyUser myUser = findMyUser(userId);
+    public MyuserDTO getRecord(String userid){
         
-        if (myUser == null)
-            return null;
-        else
-            return new MyUserDTO(myUser.getUserid(),
-                    myUser.getName(),
-                    myUser.getPassword(),  
-                    myUser.getEmail(),
-                    myUser.getPhone(),
-                    myUser.getAddress(),
-                    myUser.getSecqn(),
-                    myUser.getSecans()
-            );
+        Myuser myuser = findMyuser(userid);
+        
+        return new MyuserDTO(myuser.getUserid(),
+                myuser.getName(),
+                myuser.getPassword(),
+                myuser.getEmail(),
+                myuser.getPhone(),
+                myuser.getAddress(),
+                myuser.getSecqn(),
+                myuser.getSecans()
+        );
     }
-
-    public boolean updateRecord(MyUserDTO myUserDTO) {
-        MyUser myUser = findMyUser(myUserDTO.getUserid());
-        if (myUser != null) {           
-            myUser.setName(myUserDTO.getName());
-            myUser.setPassword(myUserDTO.getPassword());
-            myUser.setEmail(myUserDTO.getEmail());
-            myUser.setPhone(myUserDTO.getPhone());
-            myUser.setAddress(myUserDTO.getAddress());
-            myUser.setSecqn(myUserDTO.getSecQn());
-            myUser.setSecans(myUserDTO.getSecAns());
+    
+    public boolean deleteRecord(String userid){
+        
+        Myuser toBeDeleted = findMyuser(userid);
+        
+        if (toBeDeleted != null)
+        {
+            em.getTransaction().begin();
+            em.remove(toBeDeleted);
+            em.getTransaction().commit();
             return true;
-        } else {
-            return false;
         }
+        
+        return false;
     }
-
-    public boolean deleteRecord(String userId) {
+    
+    public boolean updateRecord(MyuserDTO myuserDTO) {
+        Myuser myuser = findMyuser(myuserDTO.getUserid());
+        
+        if (myuser != null)
+        {
+            myuser.setName(myuserDTO.getName());
+            myuser.setPassword(myuserDTO.getPassword());
+            myuser.setEmail(myuserDTO.getEmail());
+            myuser.setPhone(myuserDTO.getPhone());
+            myuser.setAddress(myuserDTO.getAddress());
+            myuser.setSecqn(myuserDTO.getSecQn());
+            myuser.setSecans(myuserDTO.getSecAns());
+            return true;
+        }
         
         return false;
     }

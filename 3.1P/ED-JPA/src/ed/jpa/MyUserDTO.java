@@ -5,13 +5,11 @@
  */
 package ed.jpa;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Tom
  */
-public class MyUserDTO implements Serializable {
+public class MyuserDTO {
 
     private final String userid;
     private final String name;
@@ -22,7 +20,7 @@ public class MyUserDTO implements Serializable {
     private final String secQn;
     private final String secAns;
 
-    public MyUserDTO(String userid, String name, String password,
+    public MyuserDTO(String userid, String name, String password,
             String email, String phone, String address,
             String secQn, String secAns) {
         this.userid = userid;

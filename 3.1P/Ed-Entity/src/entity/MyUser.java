@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ed.jpa;
+package entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -20,17 +21,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "MYUSER")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "MyUser.findAll", query = "SELECT m FROM MyUser m"),
-    @NamedQuery(name = "MyUser.findByUserid", query = "SELECT m FROM MyUser m WHERE m.userid = :userid"),
-    @NamedQuery(name = "MyUser.findByName", query = "SELECT m FROM MyUser m WHERE m.name = :name"),
-    @NamedQuery(name = "MyUser.findByPassword", query = "SELECT m FROM MyUser m WHERE m.password = :password"),
-    @NamedQuery(name = "MyUser.findByEmail", query = "SELECT m FROM MyUser m WHERE m.email = :email"),
-    @NamedQuery(name = "MyUser.findByPhone", query = "SELECT m FROM MyUser m WHERE m.phone = :phone"),
-    @NamedQuery(name = "MyUser.findByAddress", query = "SELECT m FROM MyUser m WHERE m.address = :address"),
-    @NamedQuery(name = "MyUser.findBySecqn", query = "SELECT m FROM MyUser m WHERE m.secqn = :secqn"),
-    @NamedQuery(name = "MyUser.findBySecans", query = "SELECT m FROM MyUser m WHERE m.secans = :secans")})
-public class MyUser implements Serializable {
+    @NamedQuery(name = "Myuser.findAll", query = "SELECT m FROM Myuser m")
+    , @NamedQuery(name = "Myuser.findByUserid", query = "SELECT m FROM Myuser m WHERE m.userid = :userid")
+    , @NamedQuery(name = "Myuser.findByName", query = "SELECT m FROM Myuser m WHERE m.name = :name")
+    , @NamedQuery(name = "Myuser.findByPassword", query = "SELECT m FROM Myuser m WHERE m.password = :password")
+    , @NamedQuery(name = "Myuser.findByEmail", query = "SELECT m FROM Myuser m WHERE m.email = :email")
+    , @NamedQuery(name = "Myuser.findByPhone", query = "SELECT m FROM Myuser m WHERE m.phone = :phone")
+    , @NamedQuery(name = "Myuser.findByAddress", query = "SELECT m FROM Myuser m WHERE m.address = :address")
+    , @NamedQuery(name = "Myuser.findBySecqn", query = "SELECT m FROM Myuser m WHERE m.secqn = :secqn")
+    , @NamedQuery(name = "Myuser.findBySecans", query = "SELECT m FROM Myuser m WHERE m.secans = :secans")})
+public class Myuser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,10 +54,10 @@ public class MyUser implements Serializable {
     @Column(name = "SECANS")
     private String secans;
 
-    public MyUser() {
+    public Myuser() {
     }
 
-    public MyUser(String userid) {
+    public Myuser(String userid) {
         this.userid = userid;
     }
 
@@ -133,10 +135,10 @@ public class MyUser implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MyUser)) {
+        if (!(object instanceof Myuser)) {
             return false;
         }
-        MyUser other = (MyUser) object;
+        Myuser other = (Myuser) object;
         if ((this.userid == null && other.userid != null) || (this.userid != null && !this.userid.equals(other.userid))) {
             return false;
         }
@@ -145,7 +147,7 @@ public class MyUser implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.MyUser[ userid=" + userid + " ]";
+        return "entity.Myuser[ userid=" + userid + " ]";
     }
     
 }

@@ -6,3 +6,5 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+/3.1P/Ed-Entity/nbproject/private/
+/3.1P/mavenproject1/target/

@@ -252,14 +252,14 @@ public class GUI extends javax.swing.JFrame {
         MyUser result = db.getRecord(UserIdInput.getText());
         ClearText();
         if (result != null) {
-            UserIdInput.setText(result.getUserid().stripTrailing());
-            UserNameInput.setText(result.getName().stripTrailing());
-            UserPasswordInput.setText(result.getPassword().stripTrailing());
-            UserEmailInput.setText(result.getEmail().stripTrailing());
-            UserPhoneInput.setText(result.getPhone().stripTrailing());
-            UserAddressInput.setText(result.getAddress().stripTrailing());
-            UserSecQnInput.setText(result.getSecQn().stripTrailing());
-            UserSecAnsInput.setText(result.getSecAns().stripTrailing());
+            UserIdInput.setText(result.getUserid());
+            UserNameInput.setText(result.getName());
+            UserPasswordInput.setText(result.getPassword());
+            UserEmailInput.setText(result.getEmail());
+            UserPhoneInput.setText(result.getPhone());
+            UserAddressInput.setText(result.getAddress());
+            UserSecQnInput.setText(result.getSecQn());
+            UserSecAnsInput.setText(result.getSecAns());
             UpdateStatus(true);
         } else {
             UpdateStatus(false);
