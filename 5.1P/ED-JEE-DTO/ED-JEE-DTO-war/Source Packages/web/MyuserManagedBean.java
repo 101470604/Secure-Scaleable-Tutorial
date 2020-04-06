@@ -9,6 +9,8 @@ import entity.MyuserDTO;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import session.MyuserFacadeRemote;
 
 /**
@@ -115,6 +117,44 @@ public class MyuserManagedBean {
         this.secAns = secAns;
     }
 
+    private boolean checkForm() {
+        return isValidUserid(userid) && isValidName(name)
+                && isValidPassword(password) && isValidPassword(cPassword)
+                && isValidEmail(email) && isValidPhone(phone)
+                && isValidAddress(address) && isValidSecQn(secQn)
+                && isValidSecAns(secAns) && password.equals(cPassword);
+    }
+
+    public void saveToFlash() {
+        try {
+            Flash fStore = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+            fStore.setKeepMessages(true);
+            fStore.put("myUserDTO", new MyuserDTO(userid, name, password, email, phone, address, secQn, secAns));
+        } catch (Exception ex) {
+            System.err.println("Unable to save to flash storage.");
+            ex.printStackTrace();
+        }
+    }
+
+    public void loadFromFlash() {
+        try {
+            Flash fStore = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+            fStore.setKeepMessages(true);
+            MyuserDTO storedUser = (MyuserDTO) fStore.get("myUserDTO");
+            userid = storedUser.getUserid();
+            name = storedUser.getName();
+            password = storedUser.getPassword();
+            cPassword = "";
+            phone = storedUser.getPhone();
+            address = storedUser.getAddress();
+            secQn = storedUser.getSecQn();
+            secAns = storedUser.getSecAns();
+        } catch (Exception ex) {
+            System.err.println("Unable to load from flash storage.");
+            ex.printStackTrace();
+        }
+    }
+
     /*
 * add a user to the database
 * @return "success" if the add operation is successful
@@ -122,26 +162,35 @@ public class MyuserManagedBean {
      */
     public String addUser() {
         String result = "failure";
-
         /* are all data entered valid?
         * and password the same as cPassword (case sensitive)
         * before calling the façade’s createRecord() method */
-        if (isValidUserid(userid) && isValidName(name)
-                && isValidPassword(password) && isValidPassword(cPassword)
-                && isValidEmail(email) && isValidPhone(phone)
-                && isValidAddress(address) && isValidSecQn(secQn)
-                && isValidSecAns(secAns) && password.equals(cPassword)) {
-            MyuserDTO myuserDTO = new MyuserDTO(userid, name,
-                    password, email, phone, address, secQn, secAns);
-            if (myuserFacade.createRecord(myuserDTO)) {
-                result = "success";
+        if (!checkForm()) {
+            System.err.println("Invalid Form");
+        } else {
+            MyuserDTO myuserDTO = new MyuserDTO(userid, name, password, email, phone, address, secQn, secAns);
+            if (myuserFacade.getRecord(userid) != null) {
+                if (!myuserFacade.updateRecord(myuserDTO)) {
+                    System.err.println("addUser: Error updating record.");
+                } else {
+                    result = "success";
+                }
+            } else {
+                if (!myuserFacade.createRecord(myuserDTO)) {
+                    System.err.println("addUser: Error Creating record.");
+                } else {
+                    result = "success";
+                }
             }
         }
         return result;
     }
 
     public String findUser() {
-        if (isValidUserid(userid)) {
+        myuserFacade.createRecord(new MyuserDTO("1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234"));
+        if (!isValidUserid(userid)) {
+            System.out.println("Invalid id");
+        } else {
             System.out.println("Valid id");
             MyuserDTO result = myuserFacade.getRecord(userid);
             if (result != null) {
@@ -152,15 +201,15 @@ public class MyuserManagedBean {
                 address = result.getAddress();
                 secQn = result.getSecQn();
                 secAns = result.getSecAns();
-
-                return "success";
             }
+            saveToFlash();
+            return "success";
         }
-        System.out.println("Invalid id");
         return "failure";
     }
 
     public boolean isValidUserid(String userid) {
+        System.err.println("Userid: " + userid);
         return (userid != null);
     }
 

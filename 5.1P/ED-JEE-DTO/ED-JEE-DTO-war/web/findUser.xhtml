@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Search for User Id</title>
     </h:head>
@@ -11,7 +12,9 @@
             <h:inputText id="userid" value="#{myuserManagedBean.userid}"
                          required="true"
                          requiredMessage="The userid field cannot be empty!"
-                         size="6"/>
+                         size="6">
+                <f:validateLength minimum="6" maximum="6" for="userid"/>
+            </h:inputText>
             <h:commandButton id="submit" value="Submit"
                              action="#{myuserManagedBean.findUser}" />
         </h:form>
