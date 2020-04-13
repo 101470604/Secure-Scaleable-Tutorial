@@ -33,7 +33,8 @@
                                  requiredMessage="The password field cannot be empty!"
                                  validatorMessage="Your password must be 6 charactes, contain 1 capital letter, 1 lower case letter, 1 number, and one special character (-,+,*)"
                                  size="6">
-                        <f:validateRegex pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[+\-*])[a-zA-Z0-9*+-]{6}$" for="password" />
+                        <f:validateRegex for="password"
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[+\-*])[a-zA-Z0-9*+-]{6}$"  />
                     </h:inputText>
                     <h:outputText value="Confirm Password "/>
                     <h:inputText id="cPassword" value="#{myuserManagedBean.cPassword}"
@@ -70,7 +71,7 @@
                                  size="60"/>
                 </h:panelGrid>
                 <p></p>
-                <h:commandButton id="submit" value="Submit"/>
+                <h:commandButton id="submit" value="Submit" action="#{myuserManagedBean.addUser}"/>
             </h:form>
         </h3>
     </h:body>
