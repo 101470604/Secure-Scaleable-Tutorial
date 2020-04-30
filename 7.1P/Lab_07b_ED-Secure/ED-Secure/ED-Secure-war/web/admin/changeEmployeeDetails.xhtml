@@ -11,7 +11,7 @@
         <h2>Change Employee Details Page</h2>
             
         <h3>Please update the details of employee
-            <h:outputText value="#{myEmpManagedBean.empId}"/>
+            <h:outputText value="#{myAdminManagedBean.empId}"/>
         </h3>
         
         <p></p>
@@ -25,7 +25,7 @@
                             <h:outputLabel value="Employee Id:"/>
                         </td>
                         <td>
-                            <h:outputText value="#{myEmpManagedBean.empId}"/>
+                            <h:outputText value="#{myAdminManagedBean.empId}"/>
                         </td>
                     </tr>
                     <tr>
@@ -37,7 +37,7 @@
                                          maxlength="25"
                                          required="true" 
                                          requiredMessage="Name must not be blank"
-                                         value="#{myEmpManagedBean.name}"/>
+                                         value="#{myAdminManagedBean.name}"/>
                         </td>
                         <td>
                             <h:message for="name" style="color:red"/>
@@ -50,7 +50,7 @@
                         <td>
                             <h:inputText title="Phone" maxlength="10"
                                          required="false"
-                                         value="#{myEmpManagedBean.phone}"/>     
+                                         value="#{myAdminManagedBean.phone}"/>     
                         </td>
                     </tr>
                     <tr>
@@ -60,7 +60,7 @@
                         <td>
                             <h:inputText title="Address" maxlength="30" 
                                          required="false"
-                                         value="#{myEmpManagedBean.address}"/>
+                                         value="#{myAdminManagedBean.address}"/>
                         </td>
                     </tr>
                     <tr>
@@ -70,7 +70,7 @@
                         <td>
                             <h:inputText title="Email" maxlength="30" 
                                          required="false"
-                                         value="#{myEmpManagedBean.email}"/>
+                                         value="#{myAdminManagedBean.email}"/>
                         </td>
                     </tr>                    
                     <tr>
@@ -80,7 +80,7 @@
                         <td>
                             <h:selectOneMenu id="appGroup"
                                              required="true"
-                                             value="#{myEmpManagedBean.appGroup}">
+                                             value="#{myAdminManagedBean.appGroup}">
                                 <f:selectItem itemValue="ED-APP-ADMIN" itemLabel="ED-APP-ADMIN"></f:selectItem>                                
                                 <f:selectItem itemValue="ED-APP-USERS" itemLabel="ED-APP-USERS"></f:selectItem>
                             </h:selectOneMenu>
@@ -93,7 +93,7 @@
                         <td>
                             <h:inputText title="BnkAccId" 
                                          required="false" maxlength="10" 
-                                         value="#{myEmpManagedBean.bnkAccId}"/>
+                                         value="#{myAdminManagedBean.bnkAccId}"/>
                         </td>
                     </tr>
                     <tr>
@@ -104,7 +104,7 @@
                             <h:inputText title="Salary" id="salary" 
                                          required="true"
                                          requiredMessage="Salary cannot be blank"
-                                         value="#{myEmpManagedBean.salary}"
+                                         value="#{myAdminManagedBean.salary}"
                                          validatorMessage="Salary must be positive!">
                                 <f:validateDoubleRange minimum="0.001"/>
                             </h:inputText>
@@ -120,7 +120,7 @@
                         <td>
                             <h:selectBooleanCheckbox id="active" 
                                                      required="false" 
-                                                     value="#{myEmpManagedBean.active}" />
+                                                     value="#{myAdminManagedBean.active}" />
                         </td>
                     </tr>
                 </tbody>
@@ -129,7 +129,7 @@
             <p></p>
 
             <h:commandButton id="submit" value="Submit" 
-                             action="#{myEmpManagedBean.changeEmployee()}"/>
+                             action="#{myAdminManagedBean.changeEmployee()}"/>
 
         </h:form>
     </h:body>

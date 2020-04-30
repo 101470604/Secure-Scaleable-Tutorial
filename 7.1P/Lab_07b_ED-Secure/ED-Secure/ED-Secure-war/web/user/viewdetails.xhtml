@@ -1,26 +1,34 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Display an Employee's Details</title>
+        <title>Employee Login</title>
     </h:head>
     <h:body>
-
-        <h2>
-            Details of Employee <h:outputText value="#{myAdminManagedBean.empId}"/>
-        </h2>
-
+        <h2>Hello #{MyEmpManagedBean.empId}</h2>
         <h:form>
             <table>
+                <thead>
+                    <tr>
+                        <td>Employee Info:</td>
+                    </tr>
+                </thead>
                 <tbody>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Employee Id:"/>
+                        </td>
+                        <td>
+                            <h:outputText value="#{MyEmpManagedBean.empId}"/>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <h:outputLabel value="Name:"/>
                         </td>
                         <td>
-                            <h:outputText value="#{myAdminManagedBean.name}"/>
+                            <h:outputText value="#{myEmpManagedBean.name}"/>
                         </td>
                     </tr>
                     <tr>
@@ -28,7 +36,7 @@
                             <h:outputLabel value="Phone:"/>
                         </td>
                         <td>
-                            <h:outputText value="#{myAdminManagedBean.phone}"/>     
+                            <h:outputText value="#{myEmpManagedBean.phone}"/>     
                         </td>
                     </tr>
                     <tr>
@@ -36,7 +44,7 @@
                             <h:outputLabel value="Address:"/>
                         </td>
                         <td>
-                            <h:outputText value="#{myAdminManagedBean.address}"/>
+                            <h:outputText value="#{myEmpManagedBean.address}"/>
                         </td>
                     </tr>
                     <tr>
@@ -44,23 +52,15 @@
                             <h:outputLabel value="Email:"/>
                         </td>
                         <td>
-                            <h:outputText value="#{myAdminManagedBean.email}"/>
+                            <h:outputText value="#{myEmpManagedBean.email}"/>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h:outputLabel value="User Group:"/>
-                        </td>
-                        <td>
-                            <h:outputText value="#{myAdminManagedBean.appGroup}"/>
-                        </td>
-                    </tr>    
+                    </tr> 
                     <tr>
                         <td>
                             <h:outputLabel value="Bank Account No:"/>
                         </td>
                         <td>
-                            <h:outputText value="#{myAdminManagedBean.bnkAccId}"/>
+                            <h:outputText value="#{myEmpManagedBean.bnkAccId}"/>
                         </td>
                     </tr>
                     <tr>
@@ -68,7 +68,7 @@
                             <h:outputLabel value="Salary:"/>
                         </td>
                         <td>
-                            <h:outputText value="#{myAdminManagedBean.salary}"/>
+                            <h:outputText value="#{myEmpManagedBean.salary}"/>
                         </td>
                     </tr>
                     <tr>
@@ -76,20 +76,24 @@
                             <h:outputLabel value="Active:"/> 
                         </td>
                         <td>
-                            <h:outputText value="#{myAdminManagedBean.active}" />
+                            <h:outputText value="#{myEmpManagedBean.active}" />
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <h:outputText value="Password"/>
+                        </td>
+                        <td>
+                            <h:inputSecret value="#{MyEmpManagedBean.password}"
+                                           required="true"
+                                           requiredMessage="You must enter your password to confirm information changes"/>
+                        </td>
+                    </tr>
+                    
                 </tbody>
             </table>
-
-            <p></p>
-
-            Click <h:outputLink value="mainmenu.xhtml">here</h:outputLink>
-            to return to the Main Menu
-
+            <h:link value="Change Password" outcome="/user/updatepassword.xhtml"/>
         </h:form>
     </h:body>
 </html>
-
-
 

@@ -19,7 +19,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/admin/mainmenu.xhtml</welcome-file>
+        <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     <error-page>
         <error-code>403</error-code>
@@ -37,6 +37,18 @@
             <role-name>ED-APP-ADMIN</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-constraint>
+        <display-name>EMS-UserAccess</display-name>
+        <web-resource-collection>
+            <web-resource-name>EMS-UserAccess</web-resource-name>
+            <description>Resources for User Access</description>
+            <url-pattern>/faces/user/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ED-APP-USERS</role-name>
+        </auth-constraint>
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>ileRealm</realm-name>
@@ -48,5 +60,9 @@
     <security-role>
         <description>EMS administrators</description>
         <role-name>ED-APP-ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <description>EMS Users</description>
+        <role-name>ED-APP-USERS</role-name>
     </security-role>
 </web-app>

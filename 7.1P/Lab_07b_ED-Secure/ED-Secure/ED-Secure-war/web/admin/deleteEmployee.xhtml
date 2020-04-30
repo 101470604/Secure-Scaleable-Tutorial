@@ -23,7 +23,7 @@
                                          required="true" 
                                          requiredMessage="Employee id must not be blank"
                                          maxlength="5" 
-                                         value="#{myEmpManagedBean.empId}">
+                                         value="#{myAdminManagedBean.empId}">
                                 <f:validateLength minimum="5" maximum="5"/>
                             </h:inputText>
                         </td>
@@ -36,7 +36,7 @@
 
             <p></p>
 
-            <h:commandButton id="submit" value="Submit" action="#{myEmpManagedBean.deleteEmployee()}"/>
+            <h:commandButton id="submit" value="Submit" action="#{myAdminManagedBean.deleteEmployee()}"/>
 
         </h:form>
     </h:body>

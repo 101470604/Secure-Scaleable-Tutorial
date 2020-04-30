@@ -24,7 +24,7 @@
                                          required="true" 
                                          requiredMessage="Employee id must not be blank"
                                          maxlength="5" 
-                                         value="#{myEmpManagedBean.empId}">
+                                         value="#{myAdminManagedBean.empId}">
                                 <f:validateLength minimum="5" maximum="5"/>
                             </h:inputText>
                         </td>
@@ -41,7 +41,7 @@
                                          maxlength="25"
                                          required="true" 
                                          requiredMessage="Name must not be blank"
-                                         value="#{myEmpManagedBean.name}"/>
+                                         value="#{myAdminManagedBean.name}"/>
                         </td>
                         <td>
                             <h:message for="name" style="color:red"/>
@@ -54,7 +54,7 @@
                         <td>
                             <h:inputText title="Phone" maxlength="10"
                                          required="false"
-                                         value="#{myEmpManagedBean.phone}"/>     
+                                         value="#{myAdminManagedBean.phone}"/>     
                         </td>
                     </tr>
                     <tr>
@@ -64,7 +64,7 @@
                         <td>
                             <h:inputText title="Address" maxlength="30" 
                                          required="false"
-                                         value="#{myEmpManagedBean.address}"/>
+                                         value="#{myAdminManagedBean.address}"/>
                         </td>
                     </tr>
                     <tr>
@@ -74,7 +74,7 @@
                         <td>
                             <h:inputText title="Email" maxlength="30" 
                                          required="false"
-                                         value="#{myEmpManagedBean.email}"/>
+                                         value="#{myAdminManagedBean.email}"/>
                         </td>
                     </tr>
                     <tr>
@@ -85,8 +85,8 @@
                             <h:inputSecret title="Password" id="password"
                                          maxlength="8" required="true" 
                                          requiredMessage="Password cannot be blank"
-                                         validator="#{myEmpManagedBean.validatePasswordPair}"
-                                         value="#{myEmpManagedBean.password}">
+                                         validator="#{myAdminManagedBean.validatePasswordPair}"
+                                         value="#{myAdminManagedBean.password}">
                                 <f:validateLength minimum="8" maximum="8"/>
                                 <f:attribute name="cnfpwd" value="#{cnfpwd}"/>
                             </h:inputSecret>
@@ -105,7 +105,7 @@
                                          maxlength="8" 
                                          required="true"
                                          requiredMessage="Confirm Password must not be blank"
-                                         value="#{myEmpManagedBean.confirmPassword}">
+                                         value="#{myAdminManagedBean.confirmPassword}">
                                 <f:validateLength minimum="8" maximum="8"/>
                             </h:inputSecret>
                         </td>
@@ -120,7 +120,7 @@
                         <td>
                             <h:selectOneMenu id="appGroup"
                                              required="true"
-                                             value="#{myEmpManagedBean.appGroup}">
+                                             value="#{myAdminManagedBean.appGroup}">
                                 <f:selectItem itemValue="ED-APP-ADMIN" itemLabel="ED-APP-ADMIN"></f:selectItem>                                
                                 <f:selectItem itemValue="ED-APP-USERS" itemLabel="ED-APP-USERS"></f:selectItem>
                             </h:selectOneMenu>
@@ -133,7 +133,7 @@
                         <td>
                             <h:inputText title="BankAccountId" 
                                          required="false" maxlength="12" 
-                                         value="#{myEmpManagedBean.bnkAccId}"/>
+                                         value="#{myAdminManagedBean.bnkAccId}"/>
                         </td>
                     </tr>
                     <tr>
@@ -144,7 +144,7 @@
                             <h:inputText title="Salary" id="salary" 
                                          required="true"
                                          requiredMessage="Salary cannot be blank"
-                                         value="#{myEmpManagedBean.salary}"
+                                         value="#{myAdminManagedBean.salary}"
                                          validatorMessage="Salary must be positive!">
                                 <f:validateDoubleRange minimum="0.001"/>
                             </h:inputText>
@@ -160,7 +160,7 @@
                         </td>
                         <td>
                             <h:selectBooleanCheckbox id="active" required="false" 
-                                                     value="#{myEmpManagedBean.active}" />
+                                                     value="#{myAdminManagedBean.active}" />
                         </td>
                     </tr>
                 </tbody>
@@ -169,7 +169,7 @@
             <p></p>
 
             <h:commandButton id="submit" value="Submit" 
-                             action="#{myEmpManagedBean.addEmployee()}"/>
+                             action="#{myAdminManagedBean.addEmployee()}"/>
 
         </h:form>
     </h:body>

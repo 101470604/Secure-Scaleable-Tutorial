@@ -6,7 +6,21 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        
+        <h2> Employee Login: </h2>
+        <h:form id="form1">
+            <h:panelGrid columns="2">
+                <h:outputText value="User Id: "/>
+                <h:inputText id="userid" value="#{MyEmpManagedBean.empId}"
+                             />
+                <h:outputText value="Password: "/>
+                <h:inputText id="name" value="#{MyEmpManagedBean.password}"
+                             required="true"
+                             requiredMessage="The name field cannot be empty!"
+                             size="30"/>
+            </h:panelGrid>
+         
+            <h:commandButton id="submit" value="Submit" action="#{MyEmpManagedBean.loginEmployee()}"/>
+        </h:form>
     </h:body>
 </html>
 
