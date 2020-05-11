@@ -110,5 +110,21 @@
             <from-outcome>Success</from-outcome>
             <to-view-id>/user/viewdetails.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/user/mainmenu.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/user/viewdetails.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Success</from-outcome>
+            <to-view-id>/user/updateDetailsSuccess.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Logout</from-outcome>
+            <to-view-id>/user/mainmenu.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>

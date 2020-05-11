@@ -16,7 +16,7 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import session.EmployeeManagementRemote;
-import entity.EmployeeDTO;
+import entity.AdminEmpDetailsDTO;
 
 /**
  *
@@ -185,7 +185,7 @@ public class MyAdminManagedBean implements Serializable {
 
         // all information seems to be valid
         // try add the employee
-        EmployeeDTO empDTO = new EmployeeDTO(empId, name, phone,
+        AdminEmpDetailsDTO empDTO = new AdminEmpDetailsDTO(empId, name, phone,
                 address, email, password, appGroup, bnkAccId, salary, active);
         boolean result = employeeManagement.addEmployee(empDTO);
         if (result) {
@@ -203,7 +203,7 @@ public class MyAdminManagedBean implements Serializable {
             return "debug";
         }
 
-        EmployeeDTO empDTO = new EmployeeDTO(empId, name, phone,
+        AdminEmpDetailsDTO empDTO = new AdminEmpDetailsDTO(empId, name, phone,
                 address, email, password, appGroup, bnkAccId, salary, active);
         boolean result = employeeManagement.updateEmpolyeeDetails(empDTO);
 
@@ -348,7 +348,7 @@ public class MyAdminManagedBean implements Serializable {
             return "debug";
         }
 
-        EmployeeDTO e = employeeManagement.getEmployeeDetails(empId);
+        AdminEmpDetailsDTO e = employeeManagement.getEmployeeDetails(empId);
 
         if (e == null) {
             // no such employee

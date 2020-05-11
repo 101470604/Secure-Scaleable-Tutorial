@@ -5,6 +5,8 @@
  */
 package web;
 
+import entity.EmpDetailsDTO;
+import entity.EmpUpdateDTO;
 import java.io.Serializable;
 import static java.util.Objects.isNull;
 import javax.annotation.security.RolesAllowed;
@@ -19,18 +21,17 @@ import session.EmployeeManagementRemote;
  *
  * @author Tom
  */
-@Named(value = "MyEmpManagedBean")
+@Named(value = "myEmpManagedBean")
 @ConversationScoped
-public class MyEmpManagedBean implements Serializable{
+public class MyEmpManagedBean implements Serializable {
 
     @EJB
     private EmployeeManagementRemote employeeManagement;
 
     @Inject
     private Conversation conversation;
-    
+
     private String empId;
-    private Double salary;
     private String password;
     private String newPassword;
     private String confirmPassword;
@@ -39,6 +40,20 @@ public class MyEmpManagedBean implements Serializable{
     private String address;
     private String email;
     private String bnkAccId;
+    private Double salary;
+
+    public MyEmpManagedBean() {
+        empId = null;
+        name = null;
+        phone = null;
+        address = null;
+        email = null;
+        password = null;
+        newPassword = null;
+        confirmPassword = null;
+        bnkAccId = null;
+        salary = 0.0;
+    }
 
     public String getEmpId() {
         return empId;
@@ -55,7 +70,7 @@ public class MyEmpManagedBean implements Serializable{
     public void setSalary(Double salary) {
         this.salary = salary;
     }
-    
+
     public String getPassword() {
         return password;
     }
@@ -119,14 +134,10 @@ public class MyEmpManagedBean implements Serializable{
     public void setBnkAccId(String bnkAccId) {
         this.bnkAccId = bnkAccId;
     }
-    
-  
+
     /**
      * Creates a new instance of NewJSFManagedBean
      */
-    public MyEmpManagedBean() {
-    }
-    
     public void startConversation() {
         conversation.begin();
     }
@@ -134,16 +145,69 @@ public class MyEmpManagedBean implements Serializable{
     public void endConversation() {
         conversation.end();
     }
-    
+
     @RolesAllowed("ED-APP-USERS")
-    public String loginEmployee(){
-        startConversation();
-        
+    public String employeeLogin() {
+
         if (isNull(empId) || conversation == null) {
             return "debug";
         }
 
-        return "Success";
+        startConversation();
+
+        EmpDetailsDTO myEmployee = employeeManagement.employeeLogin(empId, password);
+        System.err.println("Name:" + myEmployee.getName());
+        System.err.println("Phone:" + myEmployee.getPhone());
+        if (!isNull(myEmployee)) {
+            this.empId = myEmployee.getEmpid();
+            this.name = myEmployee.getName();
+            this.email = myEmployee.getEmail();
+            this.address = myEmployee.getAddress();
+            this.phone = myEmployee.getPhone();
+            this.bnkAccId = myEmployee.getBnkAccId();
+            this.salary = myEmployee.getSalary();
+            this.password = "";
+            this.confirmPassword = "";
+            this.newPassword = "";
+            return "Success";
+        }
+
+        return "Failure";
+
     }
-    
+
+    @RolesAllowed("ED-APP-USERS")
+    public String updateDetails() {
+        EmpUpdateDTO updateDTO = new EmpUpdateDTO(
+                empId, 
+                name,
+                phone,
+                address,
+                email,
+                password,
+                newPassword,
+                bnkAccId);
+        
+        return employeeManagement.updateDetails(updateDTO);
+    }
+
+    @RolesAllowed("ED-APP-USERS")
+    public String logout() {
+        try {
+            empId = null;
+            name = null;
+            phone = null;
+            address = null;
+            email = null;
+            password = null;
+            newPassword = null;
+            confirmPassword = null;
+            bnkAccId = null;
+            salary = 0.0;
+            endConversation();
+            return "Logout";
+        } catch (Exception ex) {
+            return "Debug";
+        }
+    }
 }

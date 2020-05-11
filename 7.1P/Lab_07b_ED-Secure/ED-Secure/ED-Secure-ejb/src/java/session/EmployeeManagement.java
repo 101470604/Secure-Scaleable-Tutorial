@@ -7,7 +7,11 @@ package session;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import entity.Employee;
-import entity.EmployeeDTO;
+import entity.AdminEmpDetailsDTO;
+import entity.EmpDetailsDTO;
+import entity.EmpUpdateDTO;
+import java.util.Objects;
+import static java.util.Objects.isNull;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 
@@ -15,14 +19,14 @@ import javax.annotation.security.RolesAllowed;
  *
  * @author elau
  */
-@DeclareRoles({"ED-APP-ADMIN"})
+@DeclareRoles({"ED-APP-ADMIN", "ED-APP-USERS"})
 @Stateless
 public class EmployeeManagement implements EmployeeManagementRemote {
 
     @EJB
     private EmployeeFacadeLocal employeeFacade;
 
-    private Employee employeeDTO2Entity(EmployeeDTO empDTO) {
+    private Employee employeeDTO2Entity(AdminEmpDetailsDTO empDTO) {
         if (empDTO == null) {
             // just in case
             return null;
@@ -44,14 +48,14 @@ public class EmployeeManagement implements EmployeeManagementRemote {
 
         return employee;
     }
-    
-    private EmployeeDTO employeeEntity2DTO(Employee employee) {
+
+    private AdminEmpDetailsDTO employeeEntity2DTO(Employee employee) {
         if (employee == null) {
             // just in case
             return null;
         }
-        
-        EmployeeDTO empDTO = new EmployeeDTO(
+
+        AdminEmpDetailsDTO empDTO = new AdminEmpDetailsDTO(
                 employee.getEmpid(),
                 employee.getName(),
                 employee.getPhone(),
@@ -63,7 +67,7 @@ public class EmployeeManagement implements EmployeeManagementRemote {
                 employee.getSalary(),
                 employee.isActive()
         );
-        
+
         return empDTO;
     }
 
@@ -89,13 +93,12 @@ public class EmployeeManagement implements EmployeeManagementRemote {
      */
     @Override
     @RolesAllowed({"ED-APP-ADMIN"})
-    public boolean addEmployee(EmployeeDTO empDTO) {
+    public boolean addEmployee(AdminEmpDetailsDTO empDTO) {
 
         if (empDTO == null) {
             // just in case
             return false;
         }
-
 
         // check employee exist?
         if (hasEmployee(empDTO.getEmpid())) {
@@ -117,8 +120,8 @@ public class EmployeeManagement implements EmployeeManagementRemote {
      * @return true if update is successful, false otherwise
      */
     @Override
-    @RolesAllowed({"ED-APP-ADMIN"})
-    public boolean updateEmpolyeeDetails(EmployeeDTO empDTO) {
+    @RolesAllowed({"ED-APP-ADMIN", "ED-APP-USERS"})
+    public boolean updateEmpolyeeDetails(AdminEmpDetailsDTO empDTO) {
         // check employee exist?
         if (!hasEmployee(empDTO.getEmpid())) {
             return false;
@@ -153,7 +156,7 @@ public class EmployeeManagement implements EmployeeManagementRemote {
      */
     @Override
     @RolesAllowed({"ED-APP-ADMIN"})
-    public EmployeeDTO getEmployeeDetails(String empId) {
+    public AdminEmpDetailsDTO getEmployeeDetails(String empId) {
         // get the employee
         Employee employee = employeeFacade.find(empId);
 
@@ -162,34 +165,36 @@ public class EmployeeManagement implements EmployeeManagementRemote {
             return null;
         } else {
             // found - prepare details
-            EmployeeDTO empDTO = new EmployeeDTO(employee.getEmpid(),
+            AdminEmpDetailsDTO empDTO = new AdminEmpDetailsDTO(employee.getEmpid(),
                     employee.getName(), employee.getPhone(), employee.getAddress(),
                     employee.getEmail(), employee.getPassword(), employee.getAppGroup(),
                     employee.getBnkAccId(), employee.getSalary(), employee.isActive());
-            
+
             return empDTO;
         }
     }
 
     /**
      * set the employee's active status to false
-     * 
+     *
      * @param empId
-     * @return true if it can be set to inactive and have set to inactive; false otherwise
+     * @return true if it can be set to inactive and have set to inactive; false
+     * otherwise
      */
     @Override
     @RolesAllowed({"ED-APP-ADMIN"})
     public boolean deleteEmployee(String empId) {
         return employeeFacade.deleteEmployee(empId);
     }
-    
+
     /**
      * physically remove an employee's record from database
-     * 
+     *
      * This is for lab purposes - never ever do this in real world applications
-     * 
+     *
      * @param empId
-     * @return true if the employee record has been physically removed from the database, false otherwise 
+     * @return true if the employee record has been physically removed from the
+     * database, false otherwise
      */
     @Override
     @RolesAllowed({"ED-APP-ADMIN"})
@@ -197,4 +202,60 @@ public class EmployeeManagement implements EmployeeManagementRemote {
         return employeeFacade.removeEmployee(empId);
     }
 
+    @Override
+    @RolesAllowed("ED-APP-USERS")
+    public EmpDetailsDTO employeeLogin(java.lang.String empId, java.lang.String password) {
+        Employee result = employeeFacade.find(empId);
+
+        if (!Objects.isNull(result)) {
+            if (result.checkPassword(password)) {
+                return employeeToDetailsDTO(result);
+            }
+        }
+        return null;
+    }
+
+    private EmpDetailsDTO employeeToDetailsDTO(Employee employee) {
+        return new EmpDetailsDTO(
+                employee.getEmpid(),
+                employee.getName(),
+                employee.getPhone(),
+                employee.getAddress(),
+                employee.getEmail(),
+                employee.getBnkAccId(),
+                employee.getSalary());
+    }
+    
+    
+    @Override
+    @RolesAllowed("ED-APP-USERS")
+    public String updateDetails(EmpUpdateDTO myEmployee) {
+
+        Employee employee = employeeFacade.find(myEmployee.getEmpId());
+
+        if (!isNull(employee)) {
+            if (myEmployee.getPassword().equals(employee.getPassword())&& !myEmployee.getPassword().equals("")) {
+                if (!isNull(myEmployee.getPhone())) {
+                    employee.setPhone(myEmployee.getPhone());
+                }
+                if (!isNull(myEmployee.getAddress()) && !myEmployee.getAddress().equals("")) {
+                    employee.setAddress(myEmployee.getAddress());
+                }
+                if (!isNull(myEmployee.getEmail()) && !myEmployee.getEmail().equals("")) {
+                    employee.setEmail(myEmployee.getEmail());
+                }
+                if (!isNull(myEmployee.getPassword()) && !isNull(myEmployee.getNewPassword()) && !myEmployee.getNewPassword().equals("")) {
+                    employee.setPassword(myEmployee.getNewPassword());
+                }
+                if (!isNull(myEmployee.getBnkAccId()) && !myEmployee.getBnkAccId().equals("")) {
+                    employee.setBnkAccId(myEmployee.getBnkAccId());
+                }
+                
+                if (employeeFacade.updateEmployeeDetails(employee)) {
+                    return "Success";
+                }
+            }
+        }
+        return "Failure";
+    }
 }

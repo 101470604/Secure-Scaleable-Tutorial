@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author elau
  */
-public class EmployeeDTO implements Serializable {
+public class AdminEmpDetailsDTO implements Serializable {
     
     String empid;
     String name;
@@ -23,7 +23,7 @@ public class EmployeeDTO implements Serializable {
     Double salary;
     Boolean active;
     
-    public EmployeeDTO(String empid, String name, String phone, String address,
+    public AdminEmpDetailsDTO(String empid, String name, String phone, String address,
             String email, String password, String appGroup, 
             String bnkAccId, Double salary, Boolean active) {
         this.empid = empid;

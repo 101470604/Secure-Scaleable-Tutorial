@@ -5,7 +5,7 @@
  */
 package edsecure;
 
-import entity.EmployeeDTO;
+import entity.AdminEmpDetailsDTO;
 import java.util.Scanner;
 import javax.ejb.EJB;
 import session.EmployeeManagementRemote;
@@ -26,7 +26,7 @@ public class AppClient {
         // TODO code application logic here
         AppClient client = new AppClient();
 
-        EmployeeDTO empDTO1 = new EmployeeDTO("00099", "Edmonds",
+        AdminEmpDetailsDTO empDTO1 = new AdminEmpDetailsDTO("00099", "Edmonds",
                 "9214436789", "99 John Street, Hawthorn", "edmonds@secure.com.au",
                 "password", "ED-APP-USERS",
                 "123-456789-0", 12345.0, true);
@@ -43,7 +43,7 @@ public class AppClient {
         }
     }
     
-    public void addEMSEmployee(EmployeeDTO empDTO) {
+    public void addEMSEmployee(AdminEmpDetailsDTO empDTO) {
         System.out.println("Adding an employee to the database: " + empDTO.getName());
         boolean result = employeeManagement.addEmployee(empDTO);
         if (result) {
@@ -53,7 +53,7 @@ public class AppClient {
         }
     }
     
-    public void removeEMSEmployee(EmployeeDTO empDTO) {
+    public void removeEMSEmployee(AdminEmpDetailsDTO empDTO) {
         System.out.println("Removing an employee from the database: " + empDTO.getName());
         
         boolean result = employeeManagement.removeEmployee(empDTO.getEmpid());

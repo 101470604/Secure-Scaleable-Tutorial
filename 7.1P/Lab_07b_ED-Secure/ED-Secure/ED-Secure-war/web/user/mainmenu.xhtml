@@ -10,16 +10,19 @@
         <h:form id="form1">
             <h:panelGrid columns="2">
                 <h:outputText value="User Id: "/>
-                <h:inputText id="userid" value="#{MyEmpManagedBean.empId}"
+                <h:inputText id="userid" value="#{myEmpManagedBean.empId}"
+                             required="true"
+                             requiredMessage="The name field cannot be empty!"
+                             size="6"
                              />
                 <h:outputText value="Password: "/>
-                <h:inputText id="name" value="#{MyEmpManagedBean.password}"
+                <h:inputText id="name" value="#{myEmpManagedBean.password}"
                              required="true"
                              requiredMessage="The name field cannot be empty!"
                              size="30"/>
             </h:panelGrid>
          
-            <h:commandButton id="submit" value="Submit" action="#{MyEmpManagedBean.loginEmployee()}"/>
+            <h:commandButton id="submit" value="Submit" action="#{myEmpManagedBean.employeeLogin()}"/>
         </h:form>
     </h:body>
 </html>

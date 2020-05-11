@@ -5,7 +5,9 @@
 package session;
 
 import javax.ejb.Remote;
-import entity.EmployeeDTO;
+import entity.AdminEmpDetailsDTO;
+import entity.EmpDetailsDTO;
+import entity.EmpUpdateDTO;
 
 /**
  *
@@ -16,15 +18,19 @@ public interface EmployeeManagementRemote {
 
     boolean hasEmployee(String empid);
     
-    boolean addEmployee(EmployeeDTO empDTO);
+    boolean addEmployee(AdminEmpDetailsDTO empDTO);
 
-    boolean updateEmpolyeeDetails(EmployeeDTO empDTO);
+    boolean updateEmpolyeeDetails(AdminEmpDetailsDTO empDTO);
 
     boolean updateEmployeePassword(String empid, String newPassword);
 
-    EmployeeDTO getEmployeeDetails(String empid);
+    AdminEmpDetailsDTO getEmployeeDetails(String empid);
 
     boolean deleteEmployee(String empid);
     
     boolean removeEmployee(String empid);
+
+    EmpDetailsDTO employeeLogin(java.lang.String empId, java.lang.String password);
+
+    String updateDetails(entity.EmpUpdateDTO myEmployee);
 }
