@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Change Your Details</title>
+    </h:head>
+    <h:body>
+        
+        <h2>Change Your Details Page</h2>
+        
+        <h:form>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Name:"/>
+                        </td>
+                        <td>
+                            <h:inputText title="Name" id="name"
+                                         maxlength="25"
+                                         required="true" 
+                                         requiredMessage="Name must not be blank"
+                                         value="#{myEmpManagedBean.name}"/>
+                        </td>
+                        <td>
+                            <h:message for="name" style="color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Phone:"/>
+                        </td>
+                        <td>
+                            <h:inputText title="Phone" maxlength="10"
+                                         required="false"
+                                         value="#{myEmpManagedBean.phone}"/>     
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Address:"/>
+                        </td>
+                        <td>
+                            <h:inputText title="Address" maxlength="30" 
+                                         required="false"
+                                         value="#{myEmpManagedBean.address}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Email:"/>
+                        </td>
+                        <td>
+                            <h:inputText title="Email" maxlength="30" 
+                                         required="false"
+                                         value="#{myEmpManagedBean.email}"/>
+                        </td>
+                    </tr>                                        
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Bank Account No"/>
+                        </td>
+                        <td>
+                            <h:inputText title="BnkAccId" 
+                                         required="false" maxlength="10" 
+                                         value="#{myEmpManagedBean.bnkAccId}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p></p>
+
+            <h:commandButton id="submit" value="Submit" 
+                             action="#{myEmpManagedBean.changeEmployee()}"/>
+
+        </h:form>
+    </h:body>
+</html>

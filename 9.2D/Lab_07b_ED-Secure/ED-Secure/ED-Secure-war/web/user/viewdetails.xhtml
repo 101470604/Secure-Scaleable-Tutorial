@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Employee Login</title>
+    </h:head>
+    <h:body>
+
+        <h2>Hello #{myEmpManagedBean.empId}</h2>
+
+        <h:form>
+            <h:commandButton value="Logout" action="#{myEmpManagedBean.logout()}" />
+        </h:form>
+        <h:form id="form">
+            <table>
+                <thead>
+                    <tr>
+                        <h3><td>Employee Info:</td></h3>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Employee Id:"/>
+                        </td>
+                        <td>
+                            <h:outputText value="#{myEmpManagedBean.empId}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Name:"/>
+                        </td>
+                        <td>
+                            <h:outputText value="#{myEmpManagedBean.name}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Phone:"/>
+                        </td>
+                        <td>
+                            <h:inputText value="#{myEmpManagedBean.phone}"
+                                         required="true"/>     
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Address:"/>
+                        </td>
+                        <td>
+                            <h:inputText value="#{myEmpManagedBean.address}"
+                                         required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Email:"/>
+                        </td>
+                        <td>
+                            <h:inputText value="#{myEmpManagedBean.email}"
+                                         required="true"/>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Bank Account No:"/>
+                        </td>
+                        <td>
+                            <h:inputText value="#{myEmpManagedBean.bnkAccId}"
+                                         required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Salary:"/>
+                        </td>
+                        <td>
+                            <h:outputText value="#{myEmpManagedBean.salary}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Current Password" />
+                        </td>
+                        <td>
+                            <h:inputSecret id="password" value="#{myEmpManagedBean.password}"
+                                           required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Confirm Password"/>
+                        </td>
+                        <td>
+                            <h:inputSecret id="cpasswprd" value="#{myEmpManagedBean.confirmPassword}">
+                                <f:validator validatorId="passwordsMatchValidator"/>
+                            </h:inputSecret>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <h:outputLabel value="New Password"/>
+                        </td>
+                        <td>
+                            <h:inputSecret value="#{myEmpManagedBean.newPassword}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h:commandButton value="Submit" action="#{myEmpManagedBean.updateDetails()}" />
+        </h:form>
+    </h:body>
+</html>
+

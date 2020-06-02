@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Secure Company - EMS - Main Menu</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h1><h:outputText value="SECURE Company Ltd"/></h1>
+            <h2><h:outputText value="Employee Management System"/></h2>
+            <h3><h:outputText value="Admin Main Menu" rendered="#{facesContext.externalContext.isUserInRole('ED-APP-ADMIN')}"/></h3>     
+            <h3><h:outputText value="User Main Menu" rendered="#{facesContext.externalContext.isUserInRole('ED-APP-USERS')}"/></h3>
+            <br/>    
+            
+            <h:outputLink value="addEmployee.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ED-APP-ADMIN')}">
+                Add a new employee
+            </h:outputLink>
+            <br/>  
+            <h:outputLink value="changeEmployee.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ED-APP-ADMIN')}">
+                Change an employee's details
+            </h:outputLink>
+            <br/>  
+            <h:outputLink value="changeEmployeePassword.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ED-APP-ADMIN')}">
+                Change an employee's password
+            </h:outputLink>
+            <br/>  
+            <h:outputLink value="deleteEmployee.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ED-APP-ADMIN')}">
+                Delete an employee
+            </h:outputLink>
+            <br/>  
+            <h:outputLink value="displayEmployee.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ED-APP-ADMIN')}">
+                Display employee's details
+            </h:outputLink>
+            <br/>  
+            <h:outputLink value="viewDetails.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ED-APP-USERS')}">
+                View details
+            </h:outputLink>
+            <br/>  
+            <h:outputLink value="changeYour.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ED-APP-USERS')}">
+                Change details
+            </h:outputLink>
+            <br/>  
+            <h:outputLink value="changeYourPassword.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ED-APP-USERS')}">
+                Change password
+            </h:outputLink>
+            <br/>  
+            <br/>  
+            <br/>
+
+            <h:form>
+                Click <h:commandButton value="Logout" action="#{myLoginManagedBean.logoutResult()}"/>           
+            </h:form>
+        </div>
+    </h:body>
+    
+</html>
+
